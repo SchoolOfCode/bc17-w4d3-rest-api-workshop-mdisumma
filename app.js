@@ -29,7 +29,13 @@ res.json({
 
 /* Write a request handler to return the correct response when a `GET` request is received to `/astronauts`. Choose the appropriate 
 function from the imported functions at the top of the `app.js` to get your data. */
-
+app.get("/astronauts", async (request, response) => {
+  const data = {
+    success: response.statusMessage,
+    payload: await getAstronauts(),
+  };
+  response.send(data);
+});
 // Task 2
 
 /* Write a request handler to return the correct response and perform the correct action when a `POST` request is received to 
