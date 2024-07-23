@@ -31,8 +31,8 @@ res.json({
 function from the imported functions at the top of the `app.js` to get your data. */
 app.get("/astronauts", async (request, response) => {
   const data = {
-    success: response.statusMessage,
-    payload: await getAstronauts(),
+    success: "",
+    payload: await getAstronauts(request.body),
   };
   response.send(data);
 });
@@ -40,7 +40,15 @@ app.get("/astronauts", async (request, response) => {
 
 /* Write a request handler to return the correct response and perform the correct action when a `POST` request is received to 
 `/astronauts`. Choose the appropriate function from the imported functions at the top of the `app.js` to perform the action. */
+app.post("/astronauts", async (request, response) => {
+  const astronaut = await createAstronaut(request.body);
 
+  const data = {
+    success: astronaut ? true : false,
+    payload: astronaut,
+  };
+  response.send(data);
+});
 // Task 3
 
 /* Write the request handler to return the data from the function getAstronautById. Have this handler listen to requests at the 
